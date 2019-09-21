@@ -1,20 +1,15 @@
 package com.dsoccer1980.fuel.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MoneyByMonth {
 
     private int month;
+
     private double sum;
-
-    public MoneyByMonth(int month, double sum) {
-        this.month = month;
-        this.sum = sum;
-    }
-
-    @Override
-    public String toString() {
-        return "MoneyByMonth{" +
-                "month=" + month +
-                ", sum=" + sum +
-                '}';
-    }
 }

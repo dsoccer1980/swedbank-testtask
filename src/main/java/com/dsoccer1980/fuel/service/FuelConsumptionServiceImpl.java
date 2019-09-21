@@ -1,7 +1,9 @@
 package com.dsoccer1980.fuel.service;
 
 import com.dsoccer1980.fuel.domain.FuelConsumption;
+import com.dsoccer1980.fuel.domain.FuelConsumptionStatistic;
 import com.dsoccer1980.fuel.domain.FuelType;
+import com.dsoccer1980.fuel.domain.MoneyByMonth;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
 import com.dsoccer1980.fuel.repository.FuelConsumptionRepository;
 import com.dsoccer1980.fuel.repository.FuelTypeRepository;
@@ -45,5 +47,35 @@ public class FuelConsumptionServiceImpl implements FuelConsumptionService {
     @Override
     public List<FuelConsumption> findByDriverId(long id) {
         return repository.findByDriverId(id);
+    }
+
+    @Override
+    public List<MoneyByMonth> sumSpentMoneyGroupByMonth() {
+        return repository.sumSpentMoneyGroupByMonth();
+    }
+
+    @Override
+    public List<FuelConsumption> findFuelConsumptionByMonth(int month) {
+        return repository.findFuelConsumptionByMonth(month);
+    }
+
+    @Override
+    public List<FuelConsumptionStatistic> findFuelConsumptionGroupByFuelType() {
+        return repository.findFuelConsumptionGroupByFuelType();
+    }
+
+    @Override
+    public List<MoneyByMonth> sumSpentMoneyByDriverIdGroupByMonth(long driverId) {
+        return repository.sumSpentMoneyByDriverIdGroupByMonth(driverId);
+    }
+
+    @Override
+    public List<FuelConsumption> findFuelConsumptionByMonthAndByDriverId(int month, long driverId) {
+        return repository.findFuelConsumptionByMonthAndByDriverId(month, driverId);
+    }
+
+    @Override
+    public List<FuelConsumptionStatistic> findFuelConsumptionByDriverIdGroupByFuelType(long driverId) {
+        return repository.findFuelConsumptionByDriverIdGroupByFuelType(driverId);
     }
 }
