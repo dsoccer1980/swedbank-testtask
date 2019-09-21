@@ -37,7 +37,7 @@ class FuelConsumptionServiceImplTest {
         FuelConsumptionDto consumptionDto = new FuelConsumptionDto(FUEL_TYPE1.getId(), 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
         FuelConsumption consumption = FuelConsumptionDto.getFuelConsumption(consumptionDto, FUEL_TYPE1);
         FuelConsumption expectedConsumption = new FuelConsumption(consumption);
-        expectedConsumption.setId(1L);
+        expectedConsumption.setId(1);
         when(repository.save(consumption)).thenReturn(expectedConsumption);
         when(fuelTypeRepository.findById(FUEL_TYPE1.getId())).thenReturn(Optional.of(FUEL_TYPE1));
 
@@ -64,7 +64,7 @@ class FuelConsumptionServiceImplTest {
 
     @Test
     void delete() {
-        FuelConsumption consumption = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
+        FuelConsumption consumption = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
         doNothing().when(repository).deleteById(consumption.getId());
 
         service.delete(consumption.getId());
@@ -73,8 +73,8 @@ class FuelConsumptionServiceImplTest {
 
     @Test
     void findAll() {
-        FuelConsumption consumption1 = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
-        FuelConsumption consumption2 = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 67891);
+        FuelConsumption consumption1 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
+        FuelConsumption consumption2 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 67891);
         List<FuelConsumption> expectedList = Arrays.asList(consumption1, consumption2);
         when(repository.findAll()).thenReturn(expectedList);
 
@@ -86,8 +86,8 @@ class FuelConsumptionServiceImplTest {
 
     @Test
     void findByDriverId() {
-        FuelConsumption consumption1 = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
-        FuelConsumption consumption2 = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
+        FuelConsumption consumption1 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
+        FuelConsumption consumption2 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
         List<FuelConsumption> expectedList = Arrays.asList(consumption1, consumption2);
         when(repository.findByDriverId(consumption1.getId())).thenReturn(expectedList);
 

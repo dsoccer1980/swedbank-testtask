@@ -16,7 +16,7 @@ public class FuelConsumption {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fuel_seq_gen")
     @SequenceGenerator(name = "fuel_seq_gen", sequenceName = "fuel_id_seq")
-    private Long id;
+    private long id;
 
     @OneToOne
     private FuelType fuelType;

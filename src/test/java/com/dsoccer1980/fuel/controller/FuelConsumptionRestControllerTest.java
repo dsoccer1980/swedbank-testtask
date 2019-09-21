@@ -37,8 +37,8 @@ class FuelConsumptionRestControllerTest {
 
     @Test
     void findAll() throws Exception {
-        FuelConsumption consumption1 = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
-        FuelConsumption consumption2 = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 67891);
+        FuelConsumption consumption1 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
+        FuelConsumption consumption2 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 67891);
         List<FuelConsumption> expectedList = Arrays.asList(consumption1, consumption2);
         when(fuelConsumptionService.findAll()).thenReturn(expectedList);
 
@@ -51,7 +51,7 @@ class FuelConsumptionRestControllerTest {
     @Test
     void save() throws Exception {
         FuelConsumptionDto consumptionDto = new FuelConsumptionDto(FUEL_TYPE1.getId(), 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
-        FuelConsumption expectedConsumption = new FuelConsumption(1L, FUEL_TYPE1, 10.1, 19.5, LocalDate.of(2019, 9, 21), 12345);
+        FuelConsumption expectedConsumption = new FuelConsumption(1, FUEL_TYPE1, 10.1, 19.5, LocalDate.of(2019, 9, 21), 12345);
         given(fuelConsumptionService.create(consumptionDto)).willReturn(expectedConsumption);
 
         mvc.perform(post("/consumption")
