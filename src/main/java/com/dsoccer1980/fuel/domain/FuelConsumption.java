@@ -18,7 +18,8 @@ public class FuelConsumption {
     @SequenceGenerator(name = "fuel_seq_gen", sequenceName = "fuel_id_seq")
     private long id;
 
-    private String fuelType;
+    @OneToOne(cascade = CascadeType.ALL)
+    private FuelType fuelType;
 
     private double price;
 
@@ -28,7 +29,7 @@ public class FuelConsumption {
 
     private long driverId;
 
-    public FuelConsumption(String fuelType, double price, double volume, LocalDate date, long driverId) {
+    public FuelConsumption(FuelType fuelType, double price, double volume, LocalDate date, long driverId) {
         this.fuelType = fuelType;
         this.price = price;
         this.volume = volume;
