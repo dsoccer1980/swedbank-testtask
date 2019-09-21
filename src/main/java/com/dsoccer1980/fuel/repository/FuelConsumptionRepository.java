@@ -14,5 +14,8 @@ public interface FuelConsumptionRepository extends JpaRepository<FuelConsumption
     List<FuelConsumption> findByDriverId(long id);
 
     @Query("SELECT new com.dsoccer1980.fuel.domain.MoneyByMonth(MONTH(c.date), sum(c.price*c.volume)) FROM FuelConsumption c GROUP BY MONTH(c.date)")
-    List<MoneyByMonth> sumMoneyGroupByMonth();
+    List<MoneyByMonth> sumSpentMoneyGroupByMonth();
+
+    @Query("SELECT c FROM FuelConsumption c WHERE MONTH(c.date)=:month")
+    List<FuelConsumption> findFuelConsumptionByMonth(int month);
 }
