@@ -36,4 +36,8 @@ public class FuelConsumption {
         this.date = date;
         this.driverId = driverId;
     }
+
+    public FuelConsumption(FuelConsumption f) {
+        this(f.getId(), f.getFuelType(), f.getPrice(), f.getVolume(), f.getDate(), f.getDriverId());
+    }
 }
