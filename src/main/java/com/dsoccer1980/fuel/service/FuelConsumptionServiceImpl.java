@@ -1,28 +1,35 @@
 package com.dsoccer1980.fuel.service;
 
 import com.dsoccer1980.fuel.domain.FuelConsumption;
+import com.dsoccer1980.fuel.domain.FuelType;
+import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
 import com.dsoccer1980.fuel.repository.FuelConsumptionRepository;
+import com.dsoccer1980.fuel.repository.FuelTypeRepository;
+import com.dsoccer1980.fuel.util.exception.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FuelConsumptionServiceImpl implements FuelConsumptionService {
 
     private final FuelConsumptionRepository repository;
-
-    public FuelConsumptionServiceImpl(FuelConsumptionRepository repository) {
-        this.repository = repository;
-    }
+    private final FuelTypeRepository fuelTypeRepository;
 
     @Override
-    public FuelConsumption create(FuelConsumption fuelConsumption) {
+    public FuelConsumption create(FuelConsumptionDto fuelConsumptionDto) {
+        FuelType fuelType = fuelTypeRepository
+                .findById(fuelConsumptionDto.getFuelTypeId())
+                .orElseThrow(() -> new NotFoundException("Not found fuelType with id: " + fuelConsumptionDto.getFuelTypeId()));
+        FuelConsumption fuelConsumption = FuelConsumptionDto.getFuelConsumption(fuelConsumptionDto, fuelType);
         return repository.save(fuelConsumption);
     }
 
     @Override
-    public FuelConsumption update(FuelConsumption fuelConsumption) {
-        return repository.save(fuelConsumption);
+    public FuelConsumption update(FuelConsumptionDto fuelConsumptionDto) {
+        return create(fuelConsumptionDto);
     }
 
     @Override
