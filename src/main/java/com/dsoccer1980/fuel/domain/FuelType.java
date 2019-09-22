@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -17,6 +19,9 @@ public class FuelType {
     @SequenceGenerator(name = "type_seq_gen", sequenceName = "type_id_seq")
     private long id;
 
+    @NotBlank
+    @Size(max = 5)
+    @Column(name = "type", nullable = false)
     private String type;
 
     public FuelType(String type) {
