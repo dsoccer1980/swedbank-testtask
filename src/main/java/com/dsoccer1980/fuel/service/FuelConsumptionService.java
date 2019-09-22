@@ -1,8 +1,8 @@
 package com.dsoccer1980.fuel.service;
 
 import com.dsoccer1980.fuel.domain.FuelConsumption;
-import com.dsoccer1980.fuel.domain.FuelConsumptionStatistic;
-import com.dsoccer1980.fuel.domain.MoneyByMonth;
+import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
+import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
 
 import java.util.List;

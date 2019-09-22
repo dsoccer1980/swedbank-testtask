@@ -1,4 +1,4 @@
-package com.dsoccer1980.fuel.domain;
+package com.dsoccer1980.fuel.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

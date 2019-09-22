@@ -1,8 +1,8 @@
 package com.dsoccer1980.fuel.controller;
 
 import com.dsoccer1980.fuel.domain.FuelConsumption;
-import com.dsoccer1980.fuel.domain.FuelConsumptionStatistic;
-import com.dsoccer1980.fuel.domain.MoneyByMonth;
+import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
+import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
 import com.dsoccer1980.fuel.service.FuelConsumptionService;
 import com.dsoccer1980.fuel.util.exception.NotFoundException;

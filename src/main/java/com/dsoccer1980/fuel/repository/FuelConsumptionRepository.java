@@ -1,8 +1,8 @@
 package com.dsoccer1980.fuel.repository;
 
 import com.dsoccer1980.fuel.domain.FuelConsumption;
-import com.dsoccer1980.fuel.domain.FuelConsumptionStatistic;
-import com.dsoccer1980.fuel.domain.MoneyByMonth;
+import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
+import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
