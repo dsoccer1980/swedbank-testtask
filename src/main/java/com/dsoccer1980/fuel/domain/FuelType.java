@@ -15,8 +15,7 @@ import javax.validation.constraints.Size;
 public class FuelType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "type_seq_gen")
-    @SequenceGenerator(name = "type_seq_gen", sequenceName = "type_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank

@@ -3,7 +3,6 @@ package com.dsoccer1980.fuel.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,8 +16,7 @@ import java.time.LocalDate;
 public class FuelConsumption {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fuel_seq_gen")
-    @SequenceGenerator(name = "fuel_seq_gen", sequenceName = "fuel_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne

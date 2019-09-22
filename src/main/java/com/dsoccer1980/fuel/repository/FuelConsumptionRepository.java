@@ -21,7 +21,7 @@ public interface FuelConsumptionRepository extends JpaRepository<FuelConsumption
     List<FuelConsumption> findFuelConsumptionByMonth(int month);
 
     @Query("SELECT new com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic(MONTH(c.date), c.fuelType, sum(c.volume)," +
-            " avg(c.price), sum(c.price*c.volume)) FROM FuelConsumption c GROUP BY MONTH(c.date)")
+            " avg(c.price), sum(c.price*c.volume)) FROM FuelConsumption c GROUP BY MONTH(c.date), c.fuelType")
     List<FuelConsumptionStatistic> findFuelConsumptionGroupByFuelType();
 
     @Query("SELECT new com.dsoccer1980.fuel.domain.dto.MoneyByMonth(MONTH(c.date), sum(c.price*c.volume)) FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date)")
@@ -31,6 +31,6 @@ public interface FuelConsumptionRepository extends JpaRepository<FuelConsumption
     List<FuelConsumption> findFuelConsumptionByMonthAndByDriverId(int month, long driverId);
 
     @Query("SELECT new com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic(MONTH(c.date), c.fuelType, sum(c.volume)," +
-            " avg(c.price), sum(c.price*c.volume)) FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date)")
+            " avg(c.price), sum(c.price*c.volume)) FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date), c.fuelType")
     List<FuelConsumptionStatistic> findFuelConsumptionByDriverIdGroupByFuelType(long driverId);
 }

@@ -36,6 +36,15 @@ public class FuelConsumptionDto {
         this.driverId = driverId;
     }
 
+    public FuelConsumptionDto(FuelConsumption fuelConsumption) {
+        this.id = fuelConsumption.getId();
+        this.fuelTypeId = fuelConsumption.getFuelType().getId();
+        this.price = fuelConsumption.getPrice();
+        this.volume = fuelConsumption.getVolume();
+        this.date = fuelConsumption.getDate();
+        this.driverId = fuelConsumption.getDriverId();
+    }
+
     public static FuelConsumption getFuelConsumption(FuelConsumptionDto dto, FuelType fuelType) {
         return new FuelConsumption(dto.getId(), fuelType, dto.getPrice(), dto.getVolume(), dto.getDate(), dto.getDriverId());
     }
