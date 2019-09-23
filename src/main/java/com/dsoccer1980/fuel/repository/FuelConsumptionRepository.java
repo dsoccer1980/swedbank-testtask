@@ -14,23 +14,25 @@ public interface FuelConsumptionRepository extends JpaRepository<FuelConsumption
 
     List<FuelConsumption> findByDriverId(long id);
 
-    @Query("SELECT new com.dsoccer1980.fuel.domain.dto.MoneyByMonth(MONTH(c.date), sum(c.price*c.volume)) FROM FuelConsumption c GROUP BY MONTH(c.date)")
+    @Query("SELECT new com.dsoccer1980.fuel.domain.dto.MoneyByMonth(MONTH(c.date), ROUND(sum(c.price*c.volume),2))" +
+            " FROM FuelConsumption c GROUP BY MONTH(c.date)")
     List<MoneyByMonth> sumSpentMoneyGroupByMonth();
 
     @Query("SELECT c FROM FuelConsumption c WHERE MONTH(c.date)=:month")
     List<FuelConsumption> findFuelConsumptionByMonth(int month);
 
     @Query("SELECT new com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic(MONTH(c.date), c.fuelType, sum(c.volume)," +
-            " avg(c.price), sum(c.price*c.volume)) FROM FuelConsumption c GROUP BY MONTH(c.date), c.fuelType")
+            " avg(c.price), ROUND(sum(c.price*c.volume),2)) FROM FuelConsumption c GROUP BY MONTH(c.date), c.fuelType")
     List<FuelConsumptionStatistic> findFuelConsumptionGroupByFuelType();
 
-    @Query("SELECT new com.dsoccer1980.fuel.domain.dto.MoneyByMonth(MONTH(c.date), sum(c.price*c.volume)) FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date)")
+    @Query("SELECT new com.dsoccer1980.fuel.domain.dto.MoneyByMonth(MONTH(c.date), ROUND(sum(c.price*c.volume),2))" +
+            " FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date)")
     List<MoneyByMonth> sumSpentMoneyByDriverIdGroupByMonth(long driverId);
 
     @Query("SELECT c FROM FuelConsumption c WHERE MONTH(c.date)=:month AND c.driverId=:driverId")
     List<FuelConsumption> findFuelConsumptionByMonthAndByDriverId(int month, long driverId);
 
     @Query("SELECT new com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic(MONTH(c.date), c.fuelType, sum(c.volume)," +
-            " avg(c.price), sum(c.price*c.volume)) FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date), c.fuelType")
+            " avg(c.price), ROUND(sum(c.price*c.volume),2)) FROM FuelConsumption c WHERE c.driverId=:driverId GROUP BY MONTH(c.date), c.fuelType")
     List<FuelConsumptionStatistic> findFuelConsumptionByDriverIdGroupByFuelType(long driverId);
 }

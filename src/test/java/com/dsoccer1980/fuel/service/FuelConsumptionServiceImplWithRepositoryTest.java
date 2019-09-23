@@ -71,7 +71,7 @@ class FuelConsumptionServiceImplWithRepositoryTest {
 
     @Test
     void sumSpentMoneyGroupByMonth() {
-        MoneyByMonth moneyByMonth1 = new MoneyByMonth(8, CONSUMPTION1.getVolume() * CONSUMPTION1.getPrice() + CONSUMPTION3.getVolume() * CONSUMPTION3.getPrice());
+        MoneyByMonth moneyByMonth1 = new MoneyByMonth(8, getTotal(CONSUMPTION1, CONSUMPTION3));
         MoneyByMonth moneyByMonth2 = new MoneyByMonth(9,
                 CONSUMPTION2.getVolume() * CONSUMPTION2.getPrice() +
                         CONSUMPTION4.getVolume() * CONSUMPTION4.getPrice() +
@@ -99,15 +99,14 @@ class FuelConsumptionServiceImplWithRepositoryTest {
     @Test
     void findFuelConsumptionGroupByFuelType() {
         FuelConsumptionStatistic fuelConsumptionStatistic1 = new FuelConsumptionStatistic(
-                8, FUEL_TYPE1, CONSUMPTION1.getVolume(), CONSUMPTION1.getPrice(), CONSUMPTION1.getPrice() * CONSUMPTION1.getVolume());
+                8, FUEL_TYPE1, CONSUMPTION1.getVolume(), CONSUMPTION1.getPrice(), getTotal(CONSUMPTION1));
         FuelConsumptionStatistic fuelConsumptionStatistic2 = new FuelConsumptionStatistic(
-                8, FUEL_TYPE2, CONSUMPTION3.getVolume(), CONSUMPTION3.getPrice(), CONSUMPTION3.getPrice() * CONSUMPTION3.getVolume());
+                8, FUEL_TYPE2, CONSUMPTION3.getVolume(), CONSUMPTION3.getPrice(), getTotal(CONSUMPTION3));
         FuelConsumptionStatistic fuelConsumptionStatistic3 = new FuelConsumptionStatistic(
                 9, FUEL_TYPE1, CONSUMPTION4.getVolume() + CONSUMPTION5.getVolume(),
-                (CONSUMPTION4.getPrice() + CONSUMPTION5.getPrice()) / 2,
-                CONSUMPTION4.getPrice() * CONSUMPTION4.getVolume() + CONSUMPTION5.getPrice() * CONSUMPTION5.getVolume());
+                (CONSUMPTION4.getPrice() + CONSUMPTION5.getPrice()) / 2, getTotal(CONSUMPTION4, CONSUMPTION5));
         FuelConsumptionStatistic fuelConsumptionStatistic4 = new FuelConsumptionStatistic(
-                9, FUEL_TYPE2, CONSUMPTION2.getVolume(), CONSUMPTION2.getPrice(), CONSUMPTION2.getPrice() * CONSUMPTION2.getVolume());
+                9, FUEL_TYPE2, CONSUMPTION2.getVolume(), CONSUMPTION2.getPrice(), getTotal(CONSUMPTION2));
         assertEquals(Arrays.asList(fuelConsumptionStatistic1, fuelConsumptionStatistic2, fuelConsumptionStatistic3, fuelConsumptionStatistic4),
                 service.findFuelConsumptionGroupByFuelType());
     }
@@ -115,12 +114,20 @@ class FuelConsumptionServiceImplWithRepositoryTest {
     @Test
     void findFuelConsumptionByDriverIdGroupByFuelType() {
         FuelConsumptionStatistic fuelConsumptionStatistic1 = new FuelConsumptionStatistic(
-                8, FUEL_TYPE2, CONSUMPTION3.getVolume(), CONSUMPTION3.getPrice(), CONSUMPTION3.getPrice() * CONSUMPTION3.getVolume());
+                8, FUEL_TYPE2, CONSUMPTION3.getVolume(), CONSUMPTION3.getPrice(), getTotal(CONSUMPTION3));
         FuelConsumptionStatistic fuelConsumptionStatistic2 = new FuelConsumptionStatistic(
                 9, FUEL_TYPE1, CONSUMPTION4.getVolume() + CONSUMPTION5.getVolume(),
                 (CONSUMPTION4.getPrice() + CONSUMPTION5.getPrice()) / 2,
-                CONSUMPTION4.getPrice() * CONSUMPTION4.getVolume() + CONSUMPTION5.getPrice() * CONSUMPTION5.getVolume());
+                getTotal(CONSUMPTION4, CONSUMPTION5));
         assertEquals(Arrays.asList(fuelConsumptionStatistic1, fuelConsumptionStatistic2),
                 service.findFuelConsumptionByDriverIdGroupByFuelType(2222));
+    }
+
+    private double getTotal(FuelConsumption... fuelConsumptions) {
+        double total = 0;
+        for (FuelConsumption fuelConsumption : fuelConsumptions) {
+            total += fuelConsumption.getPrice() * fuelConsumption.getVolume();
+        }
+        return Math.round(total * 100) / 100.0;
     }
 }
