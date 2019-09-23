@@ -4,6 +4,7 @@ import com.dsoccer1980.fuel.domain.FuelConsumption;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
 import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public interface FuelConsumptionService {
     FuelConsumption create(FuelConsumptionDto fuelConsumptionDto);
 
     FuelConsumption update(FuelConsumptionDto fuelConsumptionDto);
+
+    void saveMultipart(MultipartFile file);
 
     void delete(long id);
 

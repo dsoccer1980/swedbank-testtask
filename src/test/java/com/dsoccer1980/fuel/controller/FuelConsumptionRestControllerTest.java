@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -38,7 +37,7 @@ class FuelConsumptionRestControllerTest {
     @Test
     void findAll() throws Exception {
         FuelConsumption consumption1 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
-        FuelConsumption consumption2 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 67891);
+        FuelConsumption consumption2 = new FuelConsumption(2, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, 9, 21), 67891);
         List<FuelConsumption> expectedList = Arrays.asList(consumption1, consumption2);
         when(fuelConsumptionService.findAll()).thenReturn(expectedList);
 
@@ -47,12 +46,11 @@ class FuelConsumptionRestControllerTest {
                 .andExpect(content().string(containsString(consumption1.getDriverId() + "")));
     }
 
-
     @Test
     void save() throws Exception {
         FuelConsumptionDto consumptionDto = new FuelConsumptionDto(FUEL_TYPE1.getId(), 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
         FuelConsumption expectedConsumption = new FuelConsumption(1, FUEL_TYPE1, 10.1, 19.5, LocalDate.of(2019, 9, 21), 12345);
-        given(fuelConsumptionService.create(consumptionDto)).willReturn(expectedConsumption);
+        when(fuelConsumptionService.create(consumptionDto)).thenReturn(expectedConsumption);
 
         mvc.perform(post("/consumption")
                 .contentType(APPLICATION_JSON)
