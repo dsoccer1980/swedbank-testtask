@@ -15,9 +15,20 @@ The application can register one single record or bulk consumption
 
 
 ### Used stack:
-<b>Backend:</b> Java, Spring Boot, Spring Data<br>
+<b>Backend:</b> Jdk 1.8, Spring Boot, Spring Data, Hibernate<br>
 <b>Database:</b> H2<br>
 <b>Tests:</b> JUnit5, Mockito<br>
+
+##### Build program
+```bash
+mvn clean install -DskipTests
+```
+Move to the folder, where the file `fuel-consumption.jar` was created. `cd target`
+
+##### Run program
+```bash
+java -jar fuel-consumption.jar
+```
 
 
 
