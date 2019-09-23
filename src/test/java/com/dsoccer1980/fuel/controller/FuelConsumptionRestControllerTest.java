@@ -4,6 +4,7 @@ import com.dsoccer1980.fuel.domain.FuelConsumption;
 import com.dsoccer1980.fuel.domain.FuelType;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
 import com.dsoccer1980.fuel.service.FuelConsumptionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +52,11 @@ class FuelConsumptionRestControllerTest {
         FuelConsumptionDto consumptionDto = new FuelConsumptionDto(FUEL_TYPE1.getId(), 10.1, 12.5, LocalDate.of(2019, 9, 21), 12345);
         FuelConsumption expectedConsumption = new FuelConsumption(1, FUEL_TYPE1, 10.1, 19.5, LocalDate.of(2019, 9, 21), 12345);
         when(fuelConsumptionService.create(consumptionDto)).thenReturn(expectedConsumption);
+        String json = new ObjectMapper().writeValueAsString(consumptionDto);
 
         mvc.perform(post("/consumption")
                 .contentType(APPLICATION_JSON)
-                .content("{\"fuelType\":\"1\",\"price\":\"10.1\",\"volume\":\"12.5\",\"date\":\"2019-09-21\",\"driverId\":\"12345\"}"))
+                .content(json))
                 .andExpect(status().isOk());
 
     }

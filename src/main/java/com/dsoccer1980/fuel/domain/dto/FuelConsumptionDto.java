@@ -3,7 +3,9 @@ package com.dsoccer1980.fuel.domain.dto;
 import com.dsoccer1980.fuel.domain.FuelConsumption;
 import com.dsoccer1980.fuel.domain.FuelType;
 import com.dsoccer1980.fuel.util.CustomJsonDateDeserializer;
+import com.dsoccer1980.fuel.util.CustomJsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,7 @@ public class FuelConsumptionDto {
     private double volume;
 
     @JsonDeserialize(using = CustomJsonDateDeserializer.class)
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
     private LocalDate date;
 
     private long driverId;
