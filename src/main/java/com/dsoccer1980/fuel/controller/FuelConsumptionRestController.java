@@ -18,11 +18,6 @@ public class FuelConsumptionRestController {
 
     private final FuelConsumptionService service;
 
-    @GetMapping("/consumption")
-    public List<FuelConsumption> findAll() {
-        return service.findAll();
-    }
-
     @PostMapping("/consumption")
     public FuelConsumption save(@RequestBody FuelConsumptionDto dto) {
         return service.create(dto);
@@ -63,5 +58,4 @@ public class FuelConsumptionRestController {
     public List<FuelConsumptionStatistic> findFuelConsumptionByDriverIdGroupByFuelType(@PathVariable("id") long driverId) {
         return service.findFuelConsumptionByDriverIdGroupByFuelType(driverId);
     }
-
 }
