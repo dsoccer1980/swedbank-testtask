@@ -29,7 +29,7 @@ Move to the folder, where the file `fuel-consumption.jar` was created. `cd targe
 ```bash
 java -jar fuel-consumption.jar
 ```
-
+The application contains initial data. They can be deleted in file `resources/data.sql`
 
 
 ##### RESTful API
