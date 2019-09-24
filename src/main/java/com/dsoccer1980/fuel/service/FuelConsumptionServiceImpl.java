@@ -7,6 +7,7 @@ import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
 import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import com.dsoccer1980.fuel.repository.FuelConsumptionRepository;
 import com.dsoccer1980.fuel.repository.FuelTypeRepository;
+import com.dsoccer1980.fuel.util.Utils;
 import com.dsoccer1980.fuel.util.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,7 +77,9 @@ public class FuelConsumptionServiceImpl implements FuelConsumptionService {
 
     @Override
     public List<FuelConsumption> findFuelConsumptionByMonth(int month) {
-        return repository.findFuelConsumptionByMonth(month);
+        List<FuelConsumption> consumptions = repository.findFuelConsumptionByMonth(month);
+        consumptions.forEach(Utils::setTotalPrice);
+        return consumptions;
     }
 
     @Override
@@ -91,7 +94,9 @@ public class FuelConsumptionServiceImpl implements FuelConsumptionService {
 
     @Override
     public List<FuelConsumption> findFuelConsumptionByMonthAndByDriverId(int month, long driverId) {
-        return repository.findFuelConsumptionByMonthAndByDriverId(month, driverId);
+        List<FuelConsumption> consumptions = repository.findFuelConsumptionByMonthAndByDriverId(month, driverId);
+        consumptions.forEach(Utils::setTotalPrice);
+        return consumptions;
     }
 
     @Override

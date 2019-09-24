@@ -5,6 +5,7 @@ import com.dsoccer1980.fuel.domain.FuelType;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
 import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
+import com.dsoccer1980.fuel.util.Utils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,12 +89,18 @@ class FuelConsumptionServiceImplWithRepositoryTest {
 
     @Test
     void findFuelConsumptionByMonth() {
-        assertEquals(Arrays.asList(CONSUMPTION1, CONSUMPTION3), service.findFuelConsumptionByMonth(8));
+        FuelConsumption consumption1 = new FuelConsumption(CONSUMPTION1);
+        FuelConsumption consumption2 = new FuelConsumption(CONSUMPTION3);
+        Utils.setTotalPrice(consumption1);
+        Utils.setTotalPrice(consumption2);
+        assertEquals(Arrays.asList(consumption1, consumption2), service.findFuelConsumptionByMonth(8));
     }
 
     @Test
     void findFuelConsumptionByMonthAndByDriverId() {
-        assertEquals(Collections.singletonList(CONSUMPTION1), service.findFuelConsumptionByMonthAndByDriverId(8, 1111));
+        FuelConsumption consumption1 = new FuelConsumption(CONSUMPTION1);
+        Utils.setTotalPrice(consumption1);
+        assertEquals(Collections.singletonList(consumption1), service.findFuelConsumptionByMonthAndByDriverId(8, 1111));
     }
 
     @Test

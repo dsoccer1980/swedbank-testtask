@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "fuel_consumption")
 public class FuelConsumption {
 
@@ -35,6 +34,18 @@ public class FuelConsumption {
 
     @Column(name = "driver_id", nullable = false)
     private long driverId;
+
+    @Transient
+    private double totalPrice;
+
+    public FuelConsumption(long id, FuelType fuelType, double price, double volume, LocalDate date, long driverId) {
+        this.id = id;
+        this.fuelType = fuelType;
+        this.price = price;
+        this.volume = volume;
+        this.date = date;
+        this.driverId = driverId;
+    }
 
     public FuelConsumption(FuelType fuelType, double price, double volume, LocalDate date, long driverId) {
         this.fuelType = fuelType;

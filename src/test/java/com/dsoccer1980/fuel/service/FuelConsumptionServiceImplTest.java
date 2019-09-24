@@ -1,12 +1,13 @@
 package com.dsoccer1980.fuel.service;
 
 import com.dsoccer1980.fuel.domain.FuelConsumption;
-import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
 import com.dsoccer1980.fuel.domain.FuelType;
-import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import com.dsoccer1980.fuel.domain.dto.FuelConsumptionDto;
+import com.dsoccer1980.fuel.domain.dto.FuelConsumptionStatistic;
+import com.dsoccer1980.fuel.domain.dto.MoneyByMonth;
 import com.dsoccer1980.fuel.repository.FuelConsumptionRepository;
 import com.dsoccer1980.fuel.repository.FuelTypeRepository;
+import com.dsoccer1980.fuel.util.Utils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,8 @@ class FuelConsumptionServiceImplTest {
         int SEARCH_MONTH = 8;
         FuelConsumption consumption1 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, SEARCH_MONTH, 21), 12345);
         FuelConsumption consumption2 = new FuelConsumption(2, FUEL_TYPE1, 12.1, 14.5, LocalDate.of(2019, 9, 21), 12345);
+        Utils.setTotalPrice(consumption1);
+        Utils.setTotalPrice(consumption2);
         List<FuelConsumption> expectedList = Arrays.asList(consumption1, consumption2);
         when(repository.findFuelConsumptionByMonth(SEARCH_MONTH)).thenReturn(expectedList);
 
@@ -151,6 +154,8 @@ class FuelConsumptionServiceImplTest {
         long SEARCH_DRIVER_ID = 12345;
         FuelConsumption consumption1 = new FuelConsumption(1, FUEL_TYPE1, 10.1, 12.5, LocalDate.of(2019, SEARCH_MONTH, 21), SEARCH_DRIVER_ID);
         FuelConsumption consumption2 = new FuelConsumption(2, FUEL_TYPE1, 12.1, 14.5, LocalDate.of(2019, SEARCH_MONTH, 21), SEARCH_DRIVER_ID);
+        Utils.setTotalPrice(consumption1);
+        Utils.setTotalPrice(consumption2);
         List<FuelConsumption> expectedList = Arrays.asList(consumption1, consumption2);
         when(repository.findFuelConsumptionByMonthAndByDriverId(SEARCH_MONTH, SEARCH_DRIVER_ID)).thenReturn(expectedList);
 
